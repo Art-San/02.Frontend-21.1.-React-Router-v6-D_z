@@ -1,52 +1,41 @@
 import {
-    // BrowserRouter,
     Navigate,
     NavLink,
     Outlet,
-    // Redirect,
-    // Route,
-    // Switch,
     useParams,
-    // useRouteMatch,
     useRoutes,
 } from "react-router-dom";
 
-
 function App() {
-        const routes = useRoutes([{
-            path: '/',
-            element: <MainPage/>
-        },{
-            path: 'users',
-            element: <UsersLayout/>,
-            children: [{index: true,
-            element: <UserListPage/>
-                
-            }, {
-                path: ':userid',
-                element: <Outlet/>,
-                children: [
-                    {path: 'profile', element: <UserProfilePage/>},
-                    {path: 'edit', element: <EditUserPage/>},
-                    {index: true, element: <Navigate to='./profile'/>},
-                    {path: '*', element: <Navigate to='../profie'/>}
-                ],
-            },
-        ],
-    },
-    {path: '*', element: <Navigate to='/'/>}
-])
-
+    const routes = useRoutes([
+        {
+            path: "/",
+            element: <MainPage />,
+        },
+        {
+            path: "users",
+            element: <UsersLayout />,
+            children: [
+                { index: true, element: <UserListPage /> },
+                {
+                    path: ":userId",
+                    element: <Outlet />,
+                    children: [
+                        { path: "profile", element: <UserProfilePage /> },
+                        { path: "edit", element: <EditUserPage /> },
+                        { index: true, element: <Navigate to='./profile' /> },
+                        { path: "*", element: <Navigate to='../profile' /> },
+                    ],
+                },
+            ],
+        },
+        { path: "*", element: <Navigate to='/' /> },
+    ]);
     return (
         <div className='App'>
-                <h1> App Layout</h1>
-                <NavLink to='/users'>Users list Page</NavLink>
-                {routes}
-                {/* <Switch>
-                    <Route path='/users' component={UsersLayout} />
-                    <Route path='/' component={MainPage} />
-                    <Redirect to='/' />
-                </Switch> */}
+            <h1> App Layout</h1>
+            <NavLink to='/users'>Users list Page</NavLink>
+            {routes}
         </div>
     );
 }
@@ -59,19 +48,7 @@ function UsersLayout() {
         <div>
             <h1>Users Layout</h1>
             <NavLink to='/'>Main Page</NavLink>
-            <Outlet/>
-            {/* <Switch>
-                <Route
-                    path={path + "/:userId/profile"}
-                    component={UserProfilePage}
-                />
-                <Route path={path + "/:userId/edit"} component={EditUserPage} />
-                <Route path={path} exact component={UserListPage} />
-                <Redirect
-                    from={path + "/:userId"}
-                    to={path + "/:userId/profile"}
-                />
-            </Switch> */}
+            <Outlet />
         </div>
     );
 }
@@ -83,7 +60,7 @@ function UserListPage() {
             <ul>
                 {new Array(5).fill("").map((_, index) => (
                     <li key={"user_list_component_" + index}>
-                        <NavLink to={index + '/profile'}>User {index}</NavLink>
+                        <NavLink to={index + "/profile"}>User {index}</NavLink>
                     </li>
                 ))}
             </ul>
