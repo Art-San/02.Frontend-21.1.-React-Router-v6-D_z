@@ -7,7 +7,8 @@ import {
     useParams,
     useRouteMatch,
 } from "react-router-dom";
-
+// На первичной установки (с RR-5) работает,
+// если поставить шестой а пот ом поставит пятый то не работает
 function App() {
     return (
         <div className='App'>
